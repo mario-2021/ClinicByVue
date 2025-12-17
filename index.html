@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patient Dashboard — Jessica Taylor</title>
+  <link rel="stylesheet" href="/CSS/bootstrap.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Roboto:wght@100;300;400;500&display=swap">
+  <link rel="stylesheet" href="/CSS/style.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg mt-2">
+        <div class="container-fluid">
+                <img class="navbar-brand" src="./assets/TestLogo.png" alt="" class="logo">
+            <div class="collapse navbar-collapse pt-4" id="main">
+                <ul class="navbar-nav ms-auto me-auto mt-4">
+                    <li class="nav-item position-relative">
+                      <img class="position-absolute top-0 start-0" src="./assets/home_FILL0_wght300_GRAD0_opsz24.png" alt="">
+                      <a class="nav-link p-0 position-absolute top-0 end-0" href="#">Overview</a>
+                    </li>
+                    <li class="nav-item  position-relative">
+                      <div class="active">
+                        <img class="position-absolute top-0 start-0" src="./assets/group_FILL0_wght300_GRAD0_opsz24.png" alt="">
+                        <a class="nav-link p-0 position-absolute top-0 end-0" href="#">Patients</a>
+                      </div>
+                    </li>
+                    <li class="nav-item position-relative">
+                      <img class="position-absolute top-0 start-0" src="./assets/calendar_today_FILL0_wght300_GRAD0_opsz24.png" alt="">
+                      <a class="nav-link p-0 position-absolute top-0 end-0" href="#">Schedule</a>
+                    </li>
+                    <li class="nav-item position-relative">
+                      <img class="position-absolute top-0 start-0" src="./assets/chat_bubble_FILL0_wght300_GRAD0_opsz24.png" alt="">
+                      <a class="nav-link p-0 position-absolute top-0 end-0" href="#">Message</a>
+                    </li>
+                    <li class="nav-item position-relative">
+                      <img class="position-absolute top-0 start-0" src="./assets/credit_card_FILL0_wght300_GRAD0_opsz24.png" alt="">
+                      <a class="nav-link p-0 position-absolute top-0 tRaN" href="#">Transactions</a>
+                    </li>
+                </ul>
+                <div class="">
+                  <img src="./assets/senior-woman-doctor-and-portrait-smile-for-health-2023-11-27-05-18-16-utc.png" alt="">
+                  <div class="">
+                    <span>Dr. Jose Simmons</span>
+                    <span>General Practitioner</span>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+  <div class="container mt-5 d-flex overflow-hidden">
+    <!-- <div id="patientList" class="p-2 patientListGroup">
+      <h3 class="ms-2">Patients</h3>
+      <div v-for="p in patients" :key="p.id" class="list-group list-group-numbered p-2 patientsList">
+        <ul class="list-group">
+          <li class="list-group-item " @click="selectPatient(p)"
+          :class="{ active: selectedPatient && selectedPatient.id === p.id }">
+            <div class="row">
+              <div class="col-6">
+                <img :src="p.profile_picture" width="40" class="">
+              </div>
+              <div class="col-6 p-0">
+                <h6 class="fs-6 fw-bold">{{ p.name }}</h6>
+              </div>
+              <div class="col-12">
+                <p class="text-black-50 text-end m-0">{{ p.gender }}, {{ p.age }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+
+    <!-- <div class="d-flex flex-column">
+      <div class="chart-wrapper p-2 w-100">
+        <div class="graph card">
+          <h4>Blood Pressure</h4>
+          <canvas id="bpChart" width="800" height="300"></canvas>
+        </div> 
+      </div>
+      <div class="" id="DiagnosticList">
+        <p>
+          {{ patientName }}
+        </p>
+        <div class="d-flex p-3">
+          <div class="details card flex-row p-3">
+            <div class="DiagnosisHistory colorOne">
+                <img src="./assets/respiratory rate.svg" alt="" class="logoDiagnosis">
+                <p v-if="respiratoryRate" class="m-2">
+                    Respiratory Rate: <br>
+                  {{ respiratoryRate.value }} <br> 
+                  <p class="m-2">{{ respiratoryRate[]?.levels }}</p>
+                </p>  
+            </div>
+            <div class="DiagnosisHistory colorTwo">
+              <img src="./assets/temperature.svg" alt="" class="logoDiagnosis">
+              <p v-if="temperatureRate" class="m-2">
+                  Temperature: <br>
+                {{ temperatureRate.value }}  <br>
+                <p class="m-2">{{ temperatureRate[]?.levels }}</p>
+              </p>  
+            </div>
+            <div class="DiagnosisHistory colorThree">
+              <img src="./assets/HeartBPM.svg" alt="" class="logoDiagnosis">
+              <p v-if="heartRate" class="m-2">
+                  Heart Rate: <br>
+                {{ heartRate.value }} <br> 
+                <p class="m-2">{{ heartRate[]?.levels }}</p>
+              </p>  
+            </div>
+          </div>
+        </div>
+        <div class="DiagnosticList d-flex flex-column p-3" v-if="selectedPatient">
+          <div class="Diagnostic d-flex flex-row justify-content-between p-2">
+            <p class="fw-bold">Problem/Diagnosis</p>
+            <p class="fw-bold">Description</p>
+            <p class="fw-bold">Status</p>
+          </div>
+          <div class="Diagnostic d-flex flex-row justify-content-between p-2">
+            <p>{{ hypertensionDis }}</p>
+            <p>{{ hypertensionDes }}</p>
+            <p>{{ hypertensionStatus }}</p>
+          </div>
+          <div class="Diagnostic d-flex flex-row justify-content-between p-2">
+            <p>{{ TypeDiabetesNa }}</p>
+            <p>{{ TypeDiabetesDes }}</p>
+            <p>{{ TypeDiabetesSt }}</p>
+          </div>
+          <div class="Diagnostic d-flex flex-row justify-content-between p-2">
+            <p>{{ asthmaNa }}</p>
+            <p>{{ asthmaDes }}</p>
+            <p>{{ asthmaSt }}</p>
+          </div>
+          <div class="Diagnostic d-flex flex-row justify-content-around">
+            <p>Problem/Diagnosis</p>
+            <p>Description</p>
+            <p>Status</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div id="patientList">
+      <div v-if="selectedPatient">
+        <img :src="selectedPatient.profile_picture" alt="Profile" width="80"/>
+        <p><strong>{{ selectedPatient.name }}</strong></p>
+        <p>date of birth: {{ selectedPatient.date_of_birth }}</p>
+        <p>Gender: {{ selectedPatient.gender }}</p>
+        <p>contact info: {{ selectedPatient.phone_number }}</p>
+        <p>Emergency Contacts: {{ selectedPatient.emergency_contact }}</p>
+        <p>Insurance Provider: {{ selectedPatient.insurance_type }}</p>
+        <hr>
+      </div>
+      <p v-else>No data loaded</p>
+    </div> -->
+
+    <div id="app" class="container mt-4">
+      <div class="row">
+        <!-- Patient List -->
+        <div class="col-4">
+          <patient-list
+            :patients="patients"
+            :selected-patient="selectedPatient"
+            @select="selectPatient"
+          ></patient-list>
+        </div>
+
+        <!-- Patient Details -->
+        <div class="col-8">
+          <patient-details
+            v-if="selectedPatient"
+            :patient="selectedPatient"
+          ></patient-details>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/x-template" id="patient-list-template">
+      <div>
+        <h4>Patients</h4>
+
+        <div
+          v-for="p in patients"
+          :key="p.id"
+          class="list-group-item mb-2 patient-item"
+          :class="{ active: selectedPatient && selectedPatient.id === p.id }"
+          @click="$emit('select', p)"
+        >
+          <strong>{{ p.name }}</strong><br>
+          <small>{{ p.gender }}, {{ p.age }}</small>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/x-template" id="patient-details-template">
+      <div class="card p-3">
+        <h3>{{ patient.name }}</h3>
+
+        <div v-if="patient.diagnosis_history?.length">
+          <p>
+            Systolic:
+            <strong>{{ systolic }}</strong>
+            |
+            Diastolic:
+            <strong>{{ diastolic }}</strong>
+          </p>
+
+          <canvas ref="bpChart" height="150"></canvas>
+        </div>
+      </div>
+    </script>
+
+    <div v-if="hasVitals" class="row mt-3">
+      <div class="col-4">
+        <strong>Respiratory Rate</strong>
+        <p>{{ respiratoryRate }} breaths/min</p>
+      </div>
+
+      <div class="col-4">
+        <strong>Temperature</strong>
+        <p>{{ temperature }} °F</p>
+      </div>
+
+      <div class="col-4">
+        <strong>Heart Rate</strong>
+        <p>{{ heartRate }} bpm</p>
+      </div>
+    </div>
+
+    <p v-else class="text-muted">
+      No vital signs available
+    </p>
+
+
+    <script type="text/x-template" id="patient-details-template">
+      <div class="card p-3" v-if="patient">
+        <h3>{{ patient.name }}</h3>
+
+        <div v-if="hasVitals">
+          <!-- Blood Pressure -->
+          <p>
+            BP:
+            <strong>{{ systolic }}</strong> /
+            <strong>{{ diastolic }}</strong>
+          </p>
+
+          <!-- Other Vitals -->
+          <div class="row text-center mt-3">
+            <div class="col">
+              <strong>Respiratory</strong>
+              <p>{{ respiratoryRate }}</p>
+            </div>
+            <div class="col">
+              <strong>Temperature</strong>
+              <p>{{ temperature }}</p>
+            </div>
+            <div class="col">
+              <strong>Heart Rate</strong>
+              <p>{{ heartRate }}</p>
+            </div>
+          </div>
+
+          <canvas ref="bpChart" height="150"></canvas>
+        </div>
+
+        <p v-else class="text-muted">
+          No diagnosis history available
+        </p>
+      </div>
+    </script>
+
+
+  </div>
+  
+  <footer class="footer">
+    <small>Skills test submission — show only Jessica Taylor's data</small>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/JS/testApp.js" defer></script>
+
+  </body>
+</html>

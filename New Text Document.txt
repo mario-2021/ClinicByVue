@@ -1,0 +1,346 @@
+
+// new Vue({
+
+//   el: '#patientList',
+
+//   data() {
+//     return {
+//       patients: [],          
+//       selectedPatient: null  
+//     }
+//   },
+//   mounted() {
+//     this.getPatients();
+//   },
+//   methods: {               
+//     getPatients() {
+//       const username = 'coalition';
+//       const password = 'skills-test';
+//       const token = btoa(`${username}:${password}`);
+
+//       fetch('https://fedskillstest.coalitiontechnologies.workers.dev', {
+//         method: 'GET',
+//         headers: {
+//           'Authorization': `Basic ${token}`,
+//           'Content-Type': 'application/json'
+//         }
+//       })
+//       .then(res => res.json())
+//       .then(data => {
+//         this.patients = data; 
+//         // console.log(this.patients);
+//         this.selectedPatient = data[0];
+//       });
+//     },
+//     selectPatient(patient) {
+//       this.selectedPatient = patient;
+//       console.log('Selected:', patient.name);
+//     }
+//   }
+// });
+
+// new Vue({
+
+//   el: '#patient',
+
+//   data() {
+//     return {
+//       selectedPatient: null
+//     }
+//   },
+//   mounted() {
+//     this.getData();
+//   },
+
+//   methods: {
+//     getData() {
+//       // ✅ Encode username & password
+//       const username = 'coalition';
+//       const password = 'skills-test';
+//       const token = btoa(`${username}:${password}`);
+
+//       fetch('https://fedskillstest.coalitiontechnologies.workers.dev', {
+//         method: 'GET',
+//         headers: {
+//           'Authorization': `Basic ${token}`,
+//           'Content-Type': 'application/json'
+//         }
+//       })
+//       .then(res => res.json())
+//       .then(data => {
+//         this.patients = data;
+//         // console.log(data);
+//         this.selectedPatient = data.find(
+//         patient => patient.name === "Jessica Taylor"
+//         );
+//       })
+//       .catch(err => console.error('Error:', err));
+//     }
+//   }
+// });
+
+
+// new Vue({
+//   el: '#DiagnosisHistory',
+//   data() {
+//     return {
+//       chart: null,
+//       labels: [],
+//       systolic: [],
+//       diastolic: []
+//     };
+//   },
+//   mounted() {
+//     // initial sample data
+//     this.loadSample();
+//     this.renderChart();
+//   },
+//   methods: {
+//     renderChart() {
+//       const ctx = document.getElementById('bpChart').getContext('2d');
+
+//       // destroy existing chart if re-rendering
+//       if (this.chart) this.chart.destroy();
+
+//       this.chart = new Chart(ctx, {
+//         type: 'line',
+//         data: {
+//           labels: this.labels,
+//           datasets: [
+//             {
+//               label: 'Systolic (mmHg)',
+//               data: this.systolic,
+//               tension: 0.25,
+//               pointRadius: 5,
+//               borderWidth: 2,
+//               borderColor: 'rgba(220, 53, 69, 1)', // red-ish
+//               backgroundColor: 'rgba(220, 53, 69, 0.08)',
+//               fill: true,
+//               yAxisID: 'y'
+//             },
+//             {
+//               label: 'Diastolic (mmHg)',
+//               data: this.diastolic,
+//               tension: 0.25,
+//               pointRadius: 5,
+//               borderWidth: 2,
+//               borderColor: 'rgba(13, 110, 253, 1)', // blue-ish
+//               backgroundColor: 'rgba(13, 110, 253, 0.06)',
+//               fill: true,
+//               yAxisID: 'y'
+//             }
+//           ]
+//         },
+//         options: {
+//           responsive: true,
+//           maintainAspectRatio: false,
+//           interaction: { mode: 'index', intersect: false },
+//           plugins: {
+//             legend: { position: 'top' },
+//             tooltip: {
+//               callbacks: {
+//                 label: function(context) {
+//                   return context.dataset.label + ': ' + context.parsed.y + ' mmHg';
+//                 }
+//               }
+//             }
+//           },
+//           scales: {
+//             x: {
+//               display: true,
+//               title: { display: true, text: 'Date / Time' }
+//             },
+//             y: {
+//               display: true,
+//               title: { display: true, text: 'mmHg' },
+//               suggestedMin: 40,
+//               suggestedMax: 160
+//             }
+//           }
+//         }
+//       });
+
+//       // Resize canvas wrapper to match given height
+//       document.getElementById('bpChart').style.height = '300px';
+//     },
+
+//     // Example: load a sample list of dates + bp values
+//     loadSample() {
+//       // sample timestamps (could be date strings)
+//       this.labels = [
+//         '2025-11-28 08:00','2025-11-29 08:15','2025-11-30 08:10','2025-12-01 08:05',
+//         '2025-12-02 08:20','2025-12-03 08:10','2025-12-04 08:00','2025-12-05 08:10'
+//       ];
+
+//       // systolic typical range
+//       this.systolic = [120, 125, 128, 122, 130, 118, 115, 121];
+//       // diastolic typical range
+//       this.diastolic = [78, 80, 82, 79, 84, 76, 74, 77];
+
+//       this.renderChart();
+//     },
+
+//     // small helper to randomize data so you can see updates
+//     randomize() {
+//       this.systolic = this.systolic.map(v => Math.round(v + (Math.random()*10-5)));
+//       this.diastolic = this.diastolic.map(v => Math.round(v + (Math.random()*6-3)));
+//       this.renderChart();
+//     },
+
+//     // external method you can call with real API data:
+//     // setBPData([{timestamp, systolic, diastolic}, ...])
+//     setBPData(points) {
+//       this.labels = points.map(p => p.timestamp);
+//       this.systolic = points.map(p => p.systolic);
+//       this.diastolic = points.map(p => p.diastolic);
+//       this.renderChart();
+//     }
+//   }
+// });
+
+// new Vue({
+
+//   el: '#DiagnosticList',
+//   data() {
+//     return {
+//       patients: [3]
+//     }
+//   },
+//   computed: {
+//     patientName() {
+//       return this.patients[3]?.name || "No Data";
+//     },
+//     respiratoryRate() {
+//       return this.patients[3]?.diagnosis_history?.[0]?.respiratory_rate || null;
+//     },
+//     temperatureRate() {
+//       return this.patients[3]?.diagnosis_history?.[0]?.temperature || null;
+//     },
+//     heartRate() {
+//       return this.patients[3]?.diagnosis_history?.[0]?.heart_rate || null;
+//     },
+//     hypertensionDis() {
+//       return this.patients[3]?.diagnostic_list?.[0]?.name || null;
+//     },
+//     hypertensionDes() {
+//       return this.patients[3]?.diagnostic_list?.[0]?.description || null;
+//     },
+//     hypertensionStatus() {
+//       return this.patients[3]?.diagnostic_list?.[0]?.status || null;
+//     },
+//     TypeDiabetesNa() {
+//       return this.patients[3]?.diagnostic_list?.[1]?.name || null;
+//     },
+//     TypeDiabetesDes() {
+//       return this.patients[3]?.diagnostic_list?.[1]?.description || null;
+//     },
+//     TypeDiabetesSt() {
+//       return this.patients[3]?.diagnostic_list?.[1]?.status || null;
+//     },
+//     asthmaNa() {
+//       return this.patients[3]?.diagnostic_list?.[2]?.name || null;
+//     },
+//     asthmaDes() {
+//       return this.patients[3]?.diagnostic_list?.[2]?.description || null;
+//     },
+//     asthmaSt() {
+//       return this.patients[3]?.diagnostic_list?.[2]?.status || null;
+//     }
+//   },
+//   mounted() {
+//       // ✅ Encode username & password
+//       const username = 'coalition';
+//       const password = 'skills-test';
+//       const token = btoa(`${username}:${password}`);
+
+//       fetch('https://fedskillstest.coalitiontechnologies.workers.dev', {
+//         method: 'GET',
+//         headers: {
+//           'Authorization': `Basic ${token}`,
+//           'Content-Type': 'application/json'
+//         }
+//       })
+//       .then(res => res.json())
+//       .then(data => {
+//         this.patients = data;
+//         // console.log(this.respiratoryRate);
+//         // console.log(this.hypertensionDis);
+//         this.selectedPatient = data.find(
+//         patient => patient.name === "Jessica Taylor"
+//         );
+//       })
+//       .catch(err => console.error('Error:', err));
+//     }
+// });
+
+
+Vue.component('patient-list', {
+  template: '#patient-list-template',
+  props: ['patients', 'selectedPatient']
+});
+
+Vue.component('patient-details', {
+  template: '#patient-details-template',
+  props: ['patient'],
+  
+  computed: {
+    // systolic() {
+    //   return this.patient.diagnosis_history[0].blood_pressure?.systolic?.value ?? 'N/A';
+    // },
+    // diastolic() {
+    //   return this.patient.diagnosis_history[0].blood_pressure?.diastolic?.value ?? 'N/A';
+    // }
+
+    systolic() {
+      if (!this.patient || !this.patient.diagnosis_history || !this.patient.diagnosis_history.length) {
+        return 'N/A';
+      }
+    return this.patient.diagnosis_history[0].blood_pressure.systolic.value;
+    },
+
+    diastolic() {
+      if (!this.patient || !this.patient.diagnosis_history || !this.patient.diagnosis_history.length) {
+        return 'N/A';
+      }
+    return this.patient.diagnosis_history[0].blood_pressure.diastolic.value;
+    }
+
+  },
+
+  mounted() {
+    this.drawChart();
+  },
+
+  watch: {
+    patient() {
+      this.drawChart();
+    }
+  },
+
+  methods: {
+    drawChart() {
+      if (!this.patient.diagnosis_history[0].blood_pressure) return;
+
+      const ctx = this.$refs.bpChart.getContext('2d');
+
+      if (this.chart) {
+        this.chart.destroy();
+      }
+
+      this.chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Systolic', 'Diastolic'],
+          datasets: [{
+            data: [
+              this.systolic,
+              this.diastolic
+            ],
+            fill: false,
+            borderWidth: 2
+          }]
+        }
+      });
+    }
+  }
+});
